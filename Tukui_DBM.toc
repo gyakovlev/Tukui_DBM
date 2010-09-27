@@ -1,0 +1,9 @@
+## Interface: 30300
+## Title: |cffC495DDTukui|r |cffffd200DBM|r Skin
+## Notes: Tukui DBM Skin
+## Author: Affli @ Howling Fjord (RU)
+## Version 3.0alpha
+## X-Website: http://github.com/Affli/Tukui_DBM
+## RequiredDeps: Tukui
+
+Tukui_DBM.lua
