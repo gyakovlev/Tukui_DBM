@@ -6,7 +6,7 @@ Thanks ALZA, Shestak, Tukz and everyone i've forgot to mention.
 
 if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
-local noop=function()end
+
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
 		if not bar.injected then
@@ -29,7 +29,6 @@ local function SkinBars(self)
 					icon1.overlay:SetFrameStrata("BACKGROUND")
 					icon1.overlay:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -TukuiDB.buttonsize/4, TukuiDB.Scale(-2))
 					TukuiDB.SetTemplate(icon1.overlay)
-					icon1.overlay:SetBackdropColor(0,0,0,.5)
 				end
 
 				if (icon2.overlay) then
@@ -41,7 +40,6 @@ local function SkinBars(self)
 					icon2.overlay:SetFrameStrata("BACKGROUND")
 					icon2.overlay:SetPoint("BOTTOMLEFT", tbar, "BOTTOMRIGHT", TukuiDB.buttonsize/4, TukuiDB.Scale(-2))
 					TukuiDB.SetTemplate(icon2.overlay)
-					icon2.overlay:SetBackdropColor(0,0,0,.5)
 				end
 
 				if bar.color then
@@ -127,7 +125,7 @@ local function SkinBars(self)
 					name:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
 					name:SetJustifyH("LEFT")
 					name:SetShadowColor(0, 0, 0, 0)
-					name.SetFont = noop
+					name.SetFont = TukuiDB.dummy
 					name.styled=true
 				end
 				--	name:SetFont(bar.owner.options.Font, bar.owner.options.FontSize)
@@ -138,7 +136,7 @@ local function SkinBars(self)
 					timer:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
 					timer:SetJustifyH("RIGHT")
 					timer:SetShadowColor(0, 0, 0, 0)
-					timer.SetFont = noop
+					timer.SetFont = TukuiDB.dummy
 					timer.styled=true
 				end
 				--	timer:SetFont(bar.owner.options.Font, bar.owner.options.FontSize)
