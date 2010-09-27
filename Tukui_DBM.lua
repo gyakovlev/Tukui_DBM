@@ -173,9 +173,19 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 
 		if (count == 1) then
 			local	p1, anch, p2 ,xo, yo = bar:GetPoint()
-			bar:SetPoint(p1, anch, p2 ,TukuiDB.Scale(xo - TukuiDB.buttonsize/3), TukuiDB.Scale(yo - TukuiDB.buttonsize/4))
+			if DBM_SavedOptions.HealthFrameGrowUp then
+				bar:SetPoint("BOTTOMRIGHT", anch, "TOPRIGHT" ,TukuiDB.buttonsize, TukuiDB.buttonsize)
+			else
+				bar:SetPoint(p1, anch, p2 ,TukuiDB.Scale(xo - TukuiDB.buttonsize/3), TukuiDB.Scale(yo - TukuiDB.buttonsize/4))
+			end
 		else
-			bar:SetPoint("TOPLEFT", anchor, "TOPLEFT", 0, -TukuiDB.buttonsize)
+			if DBM_SavedOptions.HealthFrameGrowUp then
+				bar:ClearAllPoints()
+				bar:SetPoint("TOPLEFT", anchor, "TOPLEFT", 0, TukuiDB.buttonsize)
+			else
+				bar:ClearAllPoints()
+				bar:SetPoint("TOPLEFT", anchor, "TOPLEFT", 0, -TukuiDB.buttonsize)
+			end
 		end
 
 		if not bar.styled then
