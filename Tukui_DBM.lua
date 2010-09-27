@@ -105,7 +105,7 @@ local function SkinBars(self)
 					texture:SetTexture(TukuiCF["media"].normTex)
 					texture.styled=true
 				end
-				texture:SetTexture(bar.owner.options.Texture)
+				--texture:SetTexture(bar.owner.options.Texture)
 				texture:SetAlpha(1)
 
 				if not tbar.styled then
