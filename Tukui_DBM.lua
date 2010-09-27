@@ -228,16 +228,14 @@ end)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 TukuiDB.SetTemplate(DBMRangeCheck)
-DBMRangeCheck.elps=0
-DBMRangeCheck:HookScript("OnUpdate",function(self, elapsed)
-	self.elps=self.elps+elapsed
+DBMRangeCheck:HookScript("OnShow",function(self)
 	local c,_,_,_=DBMRangeCheck:GetBackdropBorderColor()
-	if self.elps>=.5 and c>.5 then
+	if  c>.5 then
 		self:SetBackdropColor(unpack(TukuiCF.media.backdropcolor))
 		self:SetBackdropBorderColor(unpack(TukuiCF.media.bordercolor))
-		self.elps=0
 	end
 end)
+
 local UploadDBM = function()
 	DBM_SavedOptions.Enabled=true
 	DBM_SavedOptions.WarningIconLeft=false
