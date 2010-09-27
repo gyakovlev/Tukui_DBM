@@ -1,14 +1,10 @@
 if not IsAddOnLoaded("DBM-Core") or not DBM then return end
-local debug=false
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
 local noop=function()end
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
 		if not bar.injected then
-			if debug then
-				print("Injecting "..bar.frame:GetName())
-			end
-			bar.ApplyStyle=function()
+				bar.ApplyStyle=function()
 				local frame = bar.frame
 				local tbar = _G[frame:GetName().."Bar"]
 				local spark = _G[frame:GetName().."BarSpark"]
@@ -55,10 +51,10 @@ local function SkinBars(self)
 	
 				if bar.enlarged then frame:SetWidth(bar.owner.options.HugeWidth) else frame:SetWidth(bar.owner.options.Width) end
 				if bar.enlarged then tbar:SetWidth(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
-				if bar.enlarged then frame:SetScale(bar.owner.options.HugeScale) else frame:SetScale(bar.owner.options.Scale) end
+				--if bar.enlarged then frame:SetScale(bar.owner.options.HugeScale) else frame:SetScale(bar.owner.options.Scale) end
 
 				if not frame.styled then
-				--	bar.frame:SetScale(1)
+					bar.frame:SetScale(1)
 					frame:SetHeight(TukuiDB.buttonsize/2)
 					TukuiDB.SetTemplate(bar.frame)
 					frame.styled=true
