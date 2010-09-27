@@ -154,12 +154,14 @@ hooksecurefunc(DBT, "CreateBar", SkinBars)
 -- the boss frames
 hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 	local count = 1
-	local bars = {}
 	local father=DBMBossHealthDropdown:GetParent()
 	local	title={father:GetRegions()}
 	if title[1]:IsObjectType("FontString") then
 		title[1]:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
 		title[1]:SetTextColor(1,1,1,1)
+		title[1]:SetJustifyH"RIGHT"
+	father=nil
+	title=nil
 	end
 	while (_G[format("DBM_BossHealth_Bar_%d", count)]) do
 		local bar = _G[format("DBM_BossHealth_Bar_%d", count)]
@@ -208,7 +210,6 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 			timer:SetShadowColor(0, 0, 0, 0)
 			timer.styled=true
 		end
-		tinsert(bars, _G[format("DBM_BossHealth_Bar_%d", count)])
 		count = count + 1
 	end
 end)
