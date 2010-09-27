@@ -132,13 +132,17 @@ hooksecurefunc(DBT, "CreateBar", SkinBars)
 
 hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 	local count = 1
-	local father=DBMBossHealthDropdown:GetParent()
-	local	title={father:GetRegions()}
-	if title[1]:IsObjectType("FontString") then
-		title[1]:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
-		title[1]:SetTextColor(1,1,1,1)
-		father=nil
-	title=nil
+--	bars = {}
+	local anchor=DBM_BossHealth_Bar_1:GetParent()
+	if not anchor.styled then
+		local header={anchor:GetRegions()}
+		if header[1]:IsObjectType("FontString") then
+			header[1]:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
+			header[1]:SetTextColor(1,1,1,1)
+			anchor.styled=true	
+			header=nil
+		end
+		anchor=nil
 	end
 	while (_G[format("DBM_BossHealth_Bar_%d", count)]) do
 		local bar = _G[format("DBM_BossHealth_Bar_%d", count)]
@@ -146,7 +150,7 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 		local progress = _G[bar:GetName().."Bar"]
 		local name = _G[bar:GetName().."BarName"]
 		local timer = _G[bar:GetName().."BarTimer"]
-		local anchor = _G[format("DBM_BossHealth_Bar_%d", count-1)]
+		local prev = _G[format("DBM_BossHealth_Bar_%d", count-1)]	
 
 		if (count == 1) then
 			local	_, anch, _ ,_, _ = bar:GetPoint()
@@ -157,12 +161,11 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 				bar:SetPoint("TOP", anch, "BOTTOM" , 0, -TukuiDB.buttonsize)
 			end
 		else
+			bar:ClearAllPoints()
 			if DBM_SavedOptions.HealthFrameGrowUp then
-				bar:ClearAllPoints()
-				bar:SetPoint("TOPLEFT", anchor, "TOPLEFT", 0, TukuiDB.buttonsize)
+				bar:SetPoint("TOPLEFT", prev, "TOPLEFT", 0, TukuiDB.buttonsize)
 			else
-				bar:ClearAllPoints()
-				bar:SetPoint("TOPLEFT", anchor, "TOPLEFT", 0, -TukuiDB.buttonsize)
+				bar:SetPoint("TOPLEFT", prev, "TOPLEFT", 0, -TukuiDB.buttonsize)
 			end
 		end
 
@@ -171,11 +174,25 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 			bar:SetHeight(TukuiDB.buttonsize/2)
 			TukuiDB.SetTemplate(bar)
 			background:SetNormalTexture(nil)
+		--[[	local t=0
+			bar:HookScript("OnUpdate",function(self,e)
+				t=t+e
+				if t > .5 then
+			--	print("e "..t)
+					t=0
+					progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
+				
+				end
+			end)
+		]]
 			bar.styled=true
+			
 		end	
 		
 		if not progress.styled then
 			progress:SetStatusBarTexture(TukuiCF["media"].normTex)
+		--	progress.SetStatusBarColor = TukuiDB.Dummy
+		--	progress:SetStatusBarColor(1,1,1,1)
 			progress.styled=true
 		end
 		progress:ClearAllPoints()
@@ -199,7 +216,7 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 			timer:SetShadowColor(0, 0, 0, 0)
 			timer.styled=true
 		end
-
+--		tinsert(bars, _G[format("DBM_BossHealth_Bar_%d", count)])
 		count = count + 1
 	end
 end)
@@ -240,20 +257,34 @@ local UploadDBM = function()
 	DBT_SavedOptions["DBM"].Texture="Interface\\AddOns\\Tukui\\media\\textures\\normTex"
 	DBT_SavedOptions["DBM"].IconRight=false
 end
+
 local pr = function(msg)
     print("|cffC495DDDBMskin|r:", tostring(msg))
 end
 
+local function rt(i) return function() return i end end
+
+local function healthdemo()
+		DBM.BossHealth:Show("Scary bosses")
+		DBM.BossHealth:AddBoss(rt(25), "Algalon")
+		DBM.BossHealth:AddBoss(rt(50), "Mimiron")
+		DBM.BossHealth:AddBoss(rt(75), "Hodir")
+		DBM.BossHealth:AddBoss(rt(100), "Torim")
+end
+
 SLASH_DBMSKIN1 = "/dbmskin"
 SlashCmdList["DBMSKIN"] = function(msg)
-    if(msg=="apply") then
-	StaticPopup_Show("APPLY_SKIN")        
-    elseif(msg=="test") then
-	DBM:DemoMode()
-       else
-        pr("use |cffFF0000/dbmskin apply|r to apply DBM settings.")
-	pr("use |cffFF0000/dbmskin test|r to launch DBM testmode.")
-    end
+	if(msg=="apply") then
+		StaticPopup_Show("APPLY_SKIN")        
+	elseif(msg=="test") then
+		DBM:DemoMode()
+	elseif(msg=="bh")then
+		healthdemo()
+	else
+		pr("use |cffFF0000/dbmskin apply|r to apply DBM settings.")
+		pr("use |cffFF0000/dbmskin test|r to launch DBM testmode.")
+		pr("use |cffFF0000/dbmskin bh|r to show test BossHealth frame")
+	end
 end
 
 StaticPopupDialogs["APPLY_SKIN"] = {
@@ -265,4 +296,3 @@ StaticPopupDialogs["APPLY_SKIN"] = {
     whileDead = 1,
     hideOnEscape = true,
 }
-
