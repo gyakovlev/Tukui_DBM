@@ -142,7 +142,6 @@ local function SkinBars(self)
 				--	timer:SetFont(bar.owner.options.Font, bar.owner.options.FontSize)
 				--	timer:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
 				bar:Update(0)
-				frame.tslu=0
 				bar.injected=true
 			end
 			bar:ApplyStyle()
