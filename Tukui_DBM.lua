@@ -137,8 +137,7 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 	if title[1]:IsObjectType("FontString") then
 		title[1]:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
 		title[1]:SetTextColor(1,1,1,1)
-		title[1]:SetJustifyH"RIGHT"
-	father=nil
+		father=nil
 	title=nil
 	end
 	while (_G[format("DBM_BossHealth_Bar_%d", count)]) do
@@ -150,12 +149,12 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 		local anchor = _G[format("DBM_BossHealth_Bar_%d", count-1)]
 
 		if (count == 1) then
-			local	p1, anch, p2 ,xo, yo = bar:GetPoint()
+			local	_, anch, _ ,_, _ = bar:GetPoint()
 			bar:ClearAllPoints()
 			if DBM_SavedOptions.HealthFrameGrowUp then
-				bar:SetPoint("BOTTOMRIGHT", anch, "TOPRIGHT" ,TukuiDB.buttonsize, TukuiDB.buttonsize)
+				bar:SetPoint("BOTTOM", anch, "TOP" , 0 , TukuiDB.Scale(12))
 			else
-				bar:SetPoint(p1, anch, p2 ,TukuiDB.Scale(xo - TukuiDB.buttonsize/3), TukuiDB.Scale(yo - TukuiDB.buttonsize/4))
+				bar:SetPoint("TOP", anch, "BOTTOM" , 0, -TukuiDB.buttonsize)
 			end
 		else
 			if DBM_SavedOptions.HealthFrameGrowUp then
@@ -177,10 +176,11 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 		
 		if not progress.styled then
 			progress:SetStatusBarTexture(TukuiCF["media"].normTex)
-			progress:SetPoint("TOPLEFT", bar, "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
-			progress:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
 			progress.styled=true
 		end
+		progress:ClearAllPoints()
+		progress:SetPoint("TOPLEFT", bar, "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
+		progress:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
 
 		if not name.styled then
 			name:ClearAllPoints()
