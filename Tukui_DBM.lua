@@ -142,6 +142,7 @@ local function SkinBars(self)
 				--	timer:SetFont(bar.owner.options.Font, bar.owner.options.FontSize)
 				--	timer:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
 				bar:Update(0)
+				frame.tslu=0
 				bar.injected=true
 			end
 			bar:ApplyStyle()
@@ -173,6 +174,7 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 
 		if (count == 1) then
 			local	p1, anch, p2 ,xo, yo = bar:GetPoint()
+			bar:ClearAllPoints()
 			if DBM_SavedOptions.HealthFrameGrowUp then
 				bar:SetPoint("BOTTOMRIGHT", anch, "TOPRIGHT" ,TukuiDB.buttonsize, TukuiDB.buttonsize)
 			else
@@ -227,7 +229,16 @@ end)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 TukuiDB.SetTemplate(DBMRangeCheck)
---
+DBMRangeCheck.elps=0
+DBMRangeCheck:HookScript("OnUpdate",function(self, elapsed)
+	self.elps=self.elps+elapsed
+	local c,_,_,_=DBMRangeCheck:GetBackdropBorderColor()
+	if self.elps>=.5 and c>.5 then
+		self:SetBackdropColor(unpack(TukuiCF.media.backdropcolor))
+		self:SetBackdropBorderColor(unpack(TukuiCF.media.bordercolor))
+		self.elps=0
+	end
+end)
 local UploadDBM = function()
 	DBM_SavedOptions.Enabled=true
 	DBM_SavedOptions.WarningIconLeft=false
