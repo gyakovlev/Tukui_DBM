@@ -44,18 +44,12 @@ local function SkinBars(self)
 
 				if bar.color then
 					tbar:SetStatusBarColor(self.color.r, self.color.g, self.color.b)
-				--	spark:SetVertexColor(self.color.r, self.color.g, self.color.b)
 				else
 					tbar:SetStatusBarColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
-				--	spark:SetVertexColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
 				end
 				
-				
-	
-	
 				if bar.enlarged then frame:SetWidth(bar.owner.options.HugeWidth) else frame:SetWidth(bar.owner.options.Width) end
 				if bar.enlarged then tbar:SetWidth(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
-				--if bar.enlarged then frame:SetScale(bar.owner.options.HugeScale) else frame:SetScale(bar.owner.options.Scale) end
 
 				if not frame.styled then
 					bar.frame:SetScale(1)
@@ -63,7 +57,6 @@ local function SkinBars(self)
 					TukuiDB.SetTemplate(bar.frame)
 					frame.styled=true
 				end
-				bar.frame:Show()
 
 				if not spark.killed then
 					spark:SetAlpha(0)
@@ -78,14 +71,7 @@ local function SkinBars(self)
 					icon1:SetPoint("BOTTOMRIGHT", icon1.overlay, TukuiDB.Scale(-2), TukuiDB.Scale(2))
 					icon1.styled=true
 				end
-				if bar.owner.options.IconLeft then 
-					icon1:Show()
-					icon1.overlay:Show()
-				else 
-					icon1:Hide()
-					icon1.overlay:Hide()
-				end
-
+				
 				if not icon2.styled then
 					icon2:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 					icon2:ClearAllPoints()
@@ -93,29 +79,17 @@ local function SkinBars(self)
 					icon2:SetPoint("BOTTOMRIGHT", icon2.overlay, TukuiDB.Scale(-2), TukuiDB.Scale(2))
 					icon2.styled=true
 				end
-				if bar.owner.options.IconRight then 
-					icon2:Show()
-					icon2.overlay:Show() 
-				else 
-					icon2:Hide()
-					icon2.overlay:Hide()
-				end
-	
+
 				if not texture.styled then
 					texture:SetTexture(TukuiCF["media"].normTex)
 					texture.styled=true
 				end
-				--texture:SetTexture(bar.owner.options.Texture)
-				texture:SetAlpha(1)
 
 				if not tbar.styled then
 					tbar:SetPoint("TOPLEFT", frame, "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
 					tbar:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
 					tbar.styled=true
 				end
-
-				tbar:SetAlpha(1)
-				frame:SetAlpha(1)
 
 				if not name.styled then
 					name:ClearAllPoints()
@@ -128,8 +102,7 @@ local function SkinBars(self)
 					name.SetFont = TukuiDB.dummy
 					name.styled=true
 				end
-				--	name:SetFont(bar.owner.options.Font, bar.owner.options.FontSize)
-				--	name:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
+				
 				if not timer.styled then	
 					timer:ClearAllPoints()
 					timer:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", TukuiDB.Scale(-1), TukuiDB.Scale(2))
@@ -139,8 +112,13 @@ local function SkinBars(self)
 					timer.SetFont = TukuiDB.dummy
 					timer.styled=true
 				end
-				--	timer:SetFont(bar.owner.options.Font, bar.owner.options.FontSize)
-				--	timer:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
+
+				if bar.owner.options.IconLeft then icon1:Show() icon1.overlay:Show() else icon1:Hide() icon1.overlay:Hide() end
+				if bar.owner.options.IconRight then icon2:Show() icon2.overlay:Show() else icon2:Hide() icon2.overlay:Hide() end
+				tbar:SetAlpha(1)
+				frame:SetAlpha(1)
+				texture:SetAlpha(1)
+				frame:Show()
 				bar:Update(0)
 				bar.injected=true
 			end
@@ -149,9 +127,9 @@ local function SkinBars(self)
 
 	end
 end
+
 hooksecurefunc(DBT, "CreateBar", SkinBars)
 
--- the boss frames
 hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 	local count = 1
 	local father=DBMBossHealthDropdown:GetParent()
@@ -221,6 +199,7 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 			timer:SetShadowColor(0, 0, 0, 0)
 			timer.styled=true
 		end
+
 		count = count + 1
 	end
 end)
@@ -228,6 +207,7 @@ end)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 TukuiDB.SetTemplate(DBMRangeCheck)
+
 DBMRangeCheck:HookScript("OnShow",function(self)
 	local c,_,_,_=DBMRangeCheck:GetBackdropBorderColor()
 	if  c>.5 then
