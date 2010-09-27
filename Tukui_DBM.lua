@@ -254,13 +254,13 @@ SlashCmdList["DBMSKIN"] = function(msg)
     elseif(msg=="test") then
 	DBM:DemoMode()
        else
-        pr("use |cffFF0000/dbmskin apply|r to upload DBM settings.")
+        pr("use |cffFF0000/dbmskin apply|r to apply DBM settings.")
 	pr("use |cffFF0000/dbmskin test|r to launch DBM testmode.")
     end
 end
 
 StaticPopupDialogs["APPLY_SKIN"] = {
-	text = "We need to wipe your DBM Core/GUI settings to apply Tukui-DBM skin, reconfigure your DBM after install. Your boss settings and history will remain untouched.",
+	text = "We need to set some DBM options to apply Tukui DBM skin.\nMost of your settings will remain untouched.",
 	button1 = ACCEPT,
 	button2 = CANCEL,
     OnAccept = function() UploadDBM() ReloadUI() end,
