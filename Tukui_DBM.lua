@@ -1,3 +1,9 @@
+--[[
+Tukui_DBM skin by Affli@RU-Howling Fjord
+All rights reserved.
+Thanks ALZA, Shestak, Tukz and everyone i've forgot to mention.
+]]--
+
 if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
 local noop=function()end
@@ -212,4 +218,54 @@ end)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 TukuiDB.SetTemplate(DBMRangeCheck)
+--
+local UploadDBM = function()
+	DBM_SavedOptions.Enabled=true
+	DBM_SavedOptions.WarningIconLeft=false
+	DBM_SavedOptions.WarningIconRight=false
+	DBM_SavedOptions["WarningColors"] = {{["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
+                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
+                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
+                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},}
+
+	DBT_SavedOptions["DBM"].StartColorR=classcolor.r
+	DBT_SavedOptions["DBM"].StartColorG=classcolor.g
+	DBT_SavedOptions["DBM"].StartColorB=classcolor.b
+	DBT_SavedOptions["DBM"].EndColorR=classcolor.r
+	DBT_SavedOptions["DBM"].EndColorG=classcolor.g
+	DBT_SavedOptions["DBM"].EndColorB=classcolor.b
+	DBT_SavedOptions["DBM"].Scale=1
+	DBT_SavedOptions["DBM"].HugeScale=1
+	DBT_SavedOptions["DBM"].BarXOffset=0
+	DBT_SavedOptions["DBM"].BarYOffset=3
+	DBT_SavedOptions["DBM"].IconLeft=true
+	DBT_SavedOptions["DBM"].ExpandUpwards=true
+	DBT_SavedOptions["DBM"].Texture="Interface\\AddOns\\Tukui\\media\\textures\\normTex"
+	DBT_SavedOptions["DBM"].IconRight=false
+end
+local pr = function(msg)
+    print("|cffC495DDDBMskin|r:", tostring(msg))
+end
+
+SLASH_DBMSKIN1 = "/dbmskin"
+SlashCmdList["DBMSKIN"] = function(msg)
+    if(msg=="apply") then
+	StaticPopup_Show("APPLY_SKIN")        
+    elseif(msg=="test") then
+	DBM:DemoMode()
+       else
+        pr("use |cffFF0000/dbmskin apply|r to upload DBM settings.")
+	pr("use |cffFF0000/dbmskin test|r to launch DBM testmode.")
+    end
+end
+
+StaticPopupDialogs["APPLY_SKIN"] = {
+	text = "We need to wipe your DBM Core/GUI settings to apply Tukui-DBM skin, reconfigure your DBM after install. Your boss settings and history will remain untouched.",
+	button1 = ACCEPT,
+	button2 = CANCEL,
+    OnAccept = function() UploadDBM() ReloadUI() end,
+    timeout = 0,
+    whileDead = 1,
+    hideOnEscape = true,
+}
 
