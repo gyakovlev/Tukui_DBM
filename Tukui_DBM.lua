@@ -6,6 +6,7 @@ Thanks ALZA, Shestak, Tukz and everyone i've forgot to mention.
 
 if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
+local forceclasscolor=false
 
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
@@ -180,11 +181,13 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 		
 		if not progress.styled then
 			progress:SetStatusBarTexture(TukuiCF["media"].normTex)
-			progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
-			progress:HookScript("OnValueChanged",function(self,v)
+			if(forceclasscolor)then
+				progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
+				progress:HookScript("OnUpdate",function(self,v)
 					self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
-			end)
-			--	progress.SetStatusBarColor = TukuiDB.Dummy
+				end)
+			end
+			--progress.SetStatusBarColor = TukuiDB.Dummy
 			progress.styled=true
 		end				
 		progress:ClearAllPoints()
