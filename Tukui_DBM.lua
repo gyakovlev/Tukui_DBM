@@ -174,27 +174,19 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 			bar:SetHeight(TukuiDB.buttonsize/2)
 			TukuiDB.SetTemplate(bar)
 			background:SetNormalTexture(nil)
-		--[[	local t=0
-			bar:HookScript("OnUpdate",function(self,e)
-				t=t+e
-				if t > .5 then
-			--	print("e "..t)
-					t=0
-					progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
-				
-				end
-			end)
-		]]
 			bar.styled=true
 			
 		end	
 		
 		if not progress.styled then
 			progress:SetStatusBarTexture(TukuiCF["media"].normTex)
-		--	progress.SetStatusBarColor = TukuiDB.Dummy
-		--	progress:SetStatusBarColor(1,1,1,1)
+			progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
+			progress:HookScript("OnValueChanged",function(self,v)
+					self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
+			end)
+			--	progress.SetStatusBarColor = TukuiDB.Dummy
 			progress.styled=true
-		end
+		end				
 		progress:ClearAllPoints()
 		progress:SetPoint("TOPLEFT", bar, "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
 		progress:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
