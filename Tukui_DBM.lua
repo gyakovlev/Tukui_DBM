@@ -6,7 +6,7 @@ Thanks ALZA, Shestak, Tukz and everyone i've forgot to mention.
 
 if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
-local forceclasscolor=false
+local forceclasscolor=false -- forces BossHealth to be classcolored. not recommended.
 
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
@@ -130,10 +130,9 @@ local function SkinBars(self)
 end
 
 hooksecurefunc(DBT, "CreateBar", SkinBars)
-
-hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
+ 
+local SkinBoss=function()
 	local count = 1
---	bars = {}
 	local anchor=DBM_BossHealth_Bar_1:GetParent()
 	if not anchor.styled then
 		local header={anchor:GetRegions()}
@@ -187,7 +186,6 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 					self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
 				end)
 			end
-			--progress.SetStatusBarColor = TukuiDB.Dummy
 			progress.styled=true
 		end				
 		progress:ClearAllPoints()
@@ -211,10 +209,11 @@ hooksecurefunc(DBM.BossHealth, "AddBoss", function(cId, name)
 			timer:SetShadowColor(0, 0, 0, 0)
 			timer.styled=true
 		end
---		tinsert(bars, _G[format("DBM_BossHealth_Bar_%d", count)])
 		count = count + 1
 	end
-end)
+end
+
+hooksecurefunc(DBM.BossHealth, "AddBoss",SkinBoss)
 
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
