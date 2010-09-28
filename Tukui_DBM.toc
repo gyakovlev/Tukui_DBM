@@ -2,7 +2,7 @@
 ## Title: |cffC495DDTukui|r |cffffd200DBM|r Skin
 ## Notes: Tukui DBM Skin
 ## Author: Affli @ Howling Fjord (RU)
-## Version 3.0b
+## Version 3.0c
 ## X-Website: http://github.com/Affli/Tukui_DBM
 ## RequiredDeps: Tukui
 
