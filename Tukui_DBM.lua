@@ -217,9 +217,9 @@ local SkinBoss=function()
 end
 
 -- mwahahahah, eat this ugly DBM.
-hooksecurefunc(DBT, "CreateBar", SkinBars)
-hooksecurefunc(DBM.BossHealth, "Show",SkinBossTitle)
-hooksecurefunc(DBM.BossHealth, "AddBoss",SkinBoss)
+hooksecurefunc(DBT,"CreateBar",SkinBars)
+hooksecurefunc(DBM.BossHealth,"Show",SkinBossTitle)
+hooksecurefunc(DBM.BossHealth,"AddBoss",SkinBoss)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
@@ -261,8 +261,8 @@ local function healthdemo()
 		DBM.BossHealth:Show("Scary bosses")
 		DBM.BossHealth:AddBoss(rt(25), "Algalon")
 		DBM.BossHealth:AddBoss(rt(50), "Mimiron")
-		DBM.BossHealth:AddBoss(rt(75), "Hodir")
-		DBM.BossHealth:AddBoss(rt(100), "Torim")
+		DBM.BossHealth:AddBoss(rt(75), "Sindragosa")
+		DBM.BossHealth:AddBoss(rt(100), "Hogger")
 end
 
 SLASH_DBMSKIN1 = "/dbmskin"
