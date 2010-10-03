@@ -6,9 +6,9 @@ Thanks ALZA, Shestak, Tukz and everyone i've forgot to mention.
 
 ]]--
 
---if not IsAddOnLoaded("DBM-Core") or not DBM then return end
+if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
-local forceclasscolor=false -- forces BossHealth to be classcolored. not recommended.
+local forcebosshealthclasscolor=false -- forces BossHealth to be classcolored. not recommended.
 
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
@@ -139,8 +139,8 @@ local SkinBossTitle=function()
 				header[1]:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
 				header[1]:SetTextColor(1,1,1,1)
 				anchor.styled=true	
-				header=nil
 			end
+		header=nil
 	end
 	anchor=nil
 end
@@ -174,7 +174,7 @@ local SkinBoss=function()
 
 		if not bar.styled then
 			bar:SetScale(1)
-			bar:SetHeight(TukuiDB.buttonsize/2)
+			bar:SetHeight(TukuiDB.buttonsize/3)
 			TukuiDB.SetTemplate(bar)
 			background:SetNormalTexture(nil)
 			bar.styled=true
@@ -183,7 +183,7 @@ local SkinBoss=function()
 		
 		if not progress.styled then
 			progress:SetStatusBarTexture(TukuiCF["media"].normTex)
-			if(forceclasscolor)then
+			if(forcebosshealthclasscolor)then
 				progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
 				progress:HookScript("OnUpdate",function(self,v)
 					self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
@@ -216,24 +216,15 @@ local SkinBoss=function()
 	end
 end
 
-
-local Tukui_DBM=CreateFrame"Frame"
-Tukui_DBM:RegisterEvent"ADDON_LOADED"
-Tukui_DBM:SetScript("OnEvent",function(self, event, addon)
-	if addon=="xCT" then
-		hooksecurefunc(DBT, "CreateBar", SkinBars)
-		hooksecurefunc(DBM.BossHealth, "AddBoss",SkinBoss)
-		hooksecurefunc(DBM.BossHealth, "Show",SkinBossTitle)
-
-		DBM.RangeCheck:Show()
-		DBM.RangeCheck:Hide()
-		DBMRangeCheck:HookScript("OnShow",function(self)
-			TukuiDB.SetTemplate(self)
-		end)
-	
-	end
+-- mwahahahah, eat this ugly DBM.
+hooksecurefunc(DBT, "CreateBar", SkinBars)
+hooksecurefunc(DBM.BossHealth, "Show",SkinBossTitle)
+hooksecurefunc(DBM.BossHealth, "AddBoss",SkinBoss)
+DBM.RangeCheck:Show()
+DBM.RangeCheck:Hide()
+DBMRangeCheck:HookScript("OnShow",function(self)
+	TukuiDB.SetTemplate(self)
 end)
-
 
 local UploadDBM = function()
 	DBM_SavedOptions.Enabled=true
