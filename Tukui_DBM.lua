@@ -3,7 +3,7 @@ if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 
 Tukui_DBM skin by Affli@RU-Howling Fjord
 All rights reserved.
-Thanks ALZA, Shestak, Tukz and everyone i've forgot to mention.
+Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
 
 ]]--
 
