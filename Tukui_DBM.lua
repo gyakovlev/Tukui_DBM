@@ -16,9 +16,9 @@ if(croprwicons)then
 	local replace=string.gsub
 	local old=RaidNotice_AddMessage
 	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
---		if textString:find(" |T") then
+		if textString:find(" |T") then
 			textString=replace(textString,"(:12:12)",":"..rwiconsize..":"..rwiconsize..":0:0:64:64:5:59:5:59")
---		end
+		end
 		return old(noticeFrame, textString, colorInfo)
 	end
 end
