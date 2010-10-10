@@ -1,3 +1,4 @@
+if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 --[[
 
 Tukui_DBM skin by Affli@RU-Howling Fjord
@@ -6,22 +7,14 @@ Thanks ALZA, Shestak, Tukz and everyone i've forgot to mention.
 
 ]]--
 
-if not IsAddOnLoaded("DBM-Core") or not DBM then return end
-local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
+-- little config
+----------------------------------------
 local forcebosshealthclasscolor=false -- forces BossHealth to be classcolored. not recommended.
 local croprwicons=true	-- crops blizz shitty borders from icons in RaidWarning messages
-local rwiconsize=18
+local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+----------------------------------------
 
-if(croprwicons)then
-	local replace=string.gsub
-	local old=RaidNotice_AddMessage
-	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
-		if textString:find(" |T") then
-			textString=replace(textString,"(:12:12)",":"..rwiconsize..":"..rwiconsize..":0:0:64:64:5:59:5:59")
-		end
-		return old(noticeFrame, textString, colorInfo)
-	end
-end
+local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
 
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
@@ -238,6 +231,16 @@ DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
 	TukuiDB.SetTemplate(self)
 end)
+if(croprwicons)then
+	local replace=string.gsub
+	local old=RaidNotice_AddMessage
+	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
+		if textString:find(" |T") then
+			textString=replace(textString,"(:12:12)",":"..rwiconsize..":"..rwiconsize..":0:0:64:64:5:59:5:59")
+		end
+		return old(noticeFrame, textString, colorInfo)
+	end
+end
 
 local UploadDBM = function()
 	DBM_SavedOptions.Enabled=true
