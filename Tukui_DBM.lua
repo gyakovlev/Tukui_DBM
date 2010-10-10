@@ -10,13 +10,15 @@ if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
 local forcebosshealthclasscolor=false -- forces BossHealth to be classcolored. not recommended.
 local croprwicons=true	-- crops blizz shitty borders from icons in RaidWarning messages
-local rwiconsize=32
+local rwiconsize=18
 
 if(croprwicons)then
 	local replace=string.gsub
 	local old=RaidNotice_AddMessage
 	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
-		textString=replace(textString,"(:12:12)","%1:0:0:64:64:5:59:5:59")
+--		if textString:find(" |T") then
+			textString=replace(textString,"(:12:12)",":"..rwiconsize..":"..rwiconsize..":0:0:64:64:5:59:5:59")
+--		end
 		return old(noticeFrame, textString, colorInfo)
 	end
 end
