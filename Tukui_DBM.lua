@@ -52,7 +52,7 @@ local function SkinBars(self)
 				end
 
 				if bar.color then
-					tbar:SetStatusBarColor(self.color.r, self.color.g, self.color.b)
+					tbar:SetStatusBarColor(bar.color.r, bar.color.g, bar.color.b)
 				else
 					tbar:SetStatusBarColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
 				end
