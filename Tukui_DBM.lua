@@ -38,6 +38,9 @@ local function SkinBars(self)
 					icon1.overlay:SetFrameStrata("BACKGROUND")
 					icon1.overlay:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -TukuiDB.buttonsize/4, TukuiDB.Scale(-2))
 					TukuiDB.SetTemplate(icon1.overlay)
+					if ElvUIInstalled then
+						TukuiDB.CreateShadow(icon1.overlay)
+					end
 				end
 
 				if (icon2.overlay) then
@@ -49,6 +52,9 @@ local function SkinBars(self)
 					icon2.overlay:SetFrameStrata("BACKGROUND")
 					icon2.overlay:SetPoint("BOTTOMLEFT", tbar, "BOTTOMRIGHT", TukuiDB.buttonsize/4, TukuiDB.Scale(-2))
 					TukuiDB.SetTemplate(icon2.overlay)
+					if ElvUIInstalled then
+						TukuiDB.CreateShadow(icon2.overlay)
+					end
 				end
 
 				if bar.color then
@@ -64,6 +70,9 @@ local function SkinBars(self)
 					bar.frame:SetScale(1)
 					frame:SetHeight(TukuiDB.buttonsize/3)
 					TukuiDB.SetTemplate(bar.frame)
+					if ElvUIInstalled then
+						TukuiDB.CreateShadow(bar.frame)
+					end
 					frame.styled=true
 				end
 
