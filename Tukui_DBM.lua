@@ -191,6 +191,9 @@ local SkinBoss=function()
 			bar:SetScale(1)
 			bar:SetHeight(TukuiDB.buttonsize/3)
 			TukuiDB.SetTemplate(bar)
+			if ElvUIInstalled then
+				TukuiDB.CreateShadow(bar)
+			end
 			background:SetNormalTexture(nil)
 			bar.styled=true
 			
