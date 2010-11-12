@@ -242,6 +242,9 @@ DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
 	TukuiDB.SetTemplate(self)
+	if ElvUIInstalled then
+		TukuiDB.CreateShadow(self)
+	end
 end)
 if(croprwicons)then
 	local replace=string.gsub
