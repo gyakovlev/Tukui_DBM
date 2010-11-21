@@ -9,7 +9,7 @@ Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
 
 -- little config
 ----------------------------------------
-local forcebosshealthclasscolor=true -- forces BossHealth to be classcolored. not recommended.
+local forcebosshealthclasscolor=false -- forces BossHealth to be classcolored. not recommended.
 local croprwicons=true	-- crops blizz shitty borders from icons in RaidWarning messages
 local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 ----------------------------------------
