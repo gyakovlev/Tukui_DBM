@@ -9,7 +9,7 @@ Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
 
 -- little config
 ----------------------------------------
-local forcebosshealthclasscolor=false -- forces BossHealth to be classcolored. not recommended.
+local forcebosshealthclasscolor=true -- forces BossHealth to be classcolored. not recommended.
 local croprwicons=true	-- crops blizz shitty borders from icons in RaidWarning messages
 local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 ----------------------------------------
@@ -205,7 +205,7 @@ local SkinBoss=function()
 				progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
 				progress:HookScript("OnUpdate",function(self,elapsed)
 					tslu=tslu+elapsed
-					if tslu>0.1 then
+					if tslu>0.025 then
 						self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
 						tslu=0
 					end
@@ -366,7 +366,7 @@ if addon == "DBM-GUI" then
 		_G["DBM_GUI_OptionsFrameTab2Right"]:SetAlpha(0)
 		_G["DBM_GUI_OptionsFrameTab2LeftDisabled"]:SetAlpha(0)
 		_G["DBM_GUI_OptionsFrameTab2MiddleDisabled"]:SetAlpha(0)
-		_G["DBM_GUI_OptionsFrameTab2RightDisabled"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2RighΩtDisabled"]:SetAlpha(0)
 		_G["DBM_GUI_OptionsFrameTab2HighlightTexture"]:SetAlpha(0)
 
 		_G["DBM_GUI_OptionsFrameTab1"]:ClearAllPoints()
