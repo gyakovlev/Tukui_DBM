@@ -15,7 +15,6 @@ local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works 
 ----------------------------------------
 
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
-
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
 		if not bar.injected then
@@ -66,12 +65,12 @@ local function SkinBars(self)
 				if bar.enlarged then frame:SetWidth(TukuiDB.Scale(bar.owner.options.HugeWidth)) else frame:SetWidth(TukuiDB.Scale(bar.owner.options.Width)) end
 				if bar.enlarged then tbar:SetWidth(TukuiDB.Scale(bar.owner.options.HugeWidth)) else tbar:SetWidth(TukuiDB.Scale(bar.owner.options.Width)) end
 
+				frame:SetScale(1)
 				if not frame.styled then
-					bar.frame:SetScale(1)
 					frame:SetHeight(TukuiDB.buttonsize/3)
-					TukuiDB.SetTemplate(bar.frame)
+					TukuiDB.SetTemplate(frame)
 					if ElvUIInstalled then
-						TukuiDB.CreateShadow(bar.frame)
+						TukuiDB.CreateShadow(frame)
 					end
 					frame.styled=true
 				end
@@ -202,9 +201,14 @@ local SkinBoss=function()
 		if not progress.styled then
 			progress:SetStatusBarTexture(TukuiCF["media"].normTex)
 			if(forcebosshealthclasscolor)then
+				local tslu=0
 				progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
-				progress:HookScript("OnUpdate",function(self,v)
-					self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
+				progress:HookScript("OnUpdate",function(self,elapsed)
+					tslu=tslu+elapsed
+					if tslu>0.1 then
+						self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
+						tslu=0
+					end
 				end)
 			end
 			progress.styled=true
@@ -320,3 +324,88 @@ StaticPopupDialogs["APPLY_SKIN"] = {
     whileDead = 1,
     hideOnEscape = true,
 }
+
+---
+local function SetModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[TukuiDB.myclass]
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+local function SetOriginalBackdrop(self)
+	self:SetBackdropColor(unpack(TukuiCF["media"].backdropcolor))
+	self:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor))
+end
+local function SkinButton(f)
+	f:SetNormalTexture("")
+	f:SetHighlightTexture("")
+	f:SetPushedTexture("")
+	f:SetDisabledTexture("")
+	TukuiDB.SetTemplate(f)
+	f:HookScript("OnEnter", SetModifiedBackdrop)
+	f:HookScript("OnLeave", SetOriginalBackdrop)
+end
+local SkinPanel=TukuiDB.SetTemplate
+local SkinBlizzUI = CreateFrame("Frame")
+SkinBlizzUI:RegisterEvent("ADDON_LOADED")
+SkinBlizzUI:SetScript("OnEvent", function(self, event, addon)
+if addon == "DBM-GUI" then
+		SkinPanel(_G["DBM_GUI_OptionsFrame"])
+		SkinPanel(_G["DBM_GUI_OptionsFramePanelContainer"])
+		SkinButton(_G["DBM_GUI_OptionsFrameTab1"])
+		SkinButton(_G["DBM_GUI_OptionsFrameTab2"])
+
+		_G["DBM_GUI_OptionsFrameTab1Left"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab1Middle"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab1Right"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab1LeftDisabled"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab1MiddleDisabled"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab1RightDisabled"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab1HighlightTexture"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2Left"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2Middle"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2Right"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2LeftDisabled"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2MiddleDisabled"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2RightDisabled"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameTab2HighlightTexture"]:SetAlpha(0)
+
+		_G["DBM_GUI_OptionsFrameTab1"]:ClearAllPoints()
+		_G["DBM_GUI_OptionsFrameTab1"]:SetPoint("TOPLEFT", _G["DBM_GUI_OptionsFrameBossMods"], "TOPLEFT", 0, TukuiDB.Scale(27))
+		_G["DBM_GUI_OptionsFrameTab2"]:ClearAllPoints()
+		_G["DBM_GUI_OptionsFrameTab2"]:SetPoint("TOPLEFT", _G["DBM_GUI_OptionsFrameTab1"], "TOPRIGHT", TukuiDB.Scale(6), 0)
+
+		_G["DBM_GUI_OptionsFrameBossMods"]:HookScript("OnShow", function(self) SkinPanel(self) end)
+		_G["DBM_GUI_OptionsFrameDBMOptions"]:HookScript("OnShow", function(self) SkinPanel(self) end)
+		_G["DBM_GUI_OptionsFrameHeader"]:SetTexture("")
+		_G["DBM_GUI_OptionsFrameHeader"]:ClearAllPoints()
+		_G["DBM_GUI_OptionsFrameHeader"]:SetPoint("TOP", DBM_GUI_OptionsFrame, 0, TukuiDB.Scale(7))
+
+		_G["DBM_GUI_OptionsFrameBossModsTop"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameBossModsTopLeft"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameBossModsTopRight"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameBossModsBottom"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameBossModsBottomLeft"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameBossModsBottomRight"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameBossModsLeft"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameBossModsRight"]:SetAlpha(0)
+		
+		_G["DBM_GUI_OptionsFrameDBMOptionsTop"]:SetAlpha(0)
+		_G["DBM_GUI_OptionsFrameDBMOptionsBottom"]:SetAlpha(0)
+		
+		-- disable scale settings
+	--	_G["DBM_GUI_Option_61"]:SetAlpha(0)
+	--	_G["DBM_GUI_Option_67"]:SetAlpha(0)
+
+		local dbmbskins = {
+			"DBM_GUI_OptionsFrameOkay",
+		}
+
+		for i = 1, getn(dbmbskins) do
+			local DBMButtons = _G[dbmbskins[i]]
+			if DBMButtons then
+				SkinButton(DBMButtons)
+			end
+		end
+	end
+end) 
+
