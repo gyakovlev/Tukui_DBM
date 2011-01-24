@@ -1,4 +1,3 @@
-if not IsAddOnLoaded("DBM-Core") or not DBM then return end
 --[[
 
 Tukui_DBM skin by Affli@RU-Howling Fjord
@@ -15,6 +14,15 @@ local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works 
 ----------------------------------------
 
 local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
+
+-- damn edits compatbility
+local TukuiDB
+if _G["ElvDB"] then
+	TukuiDB=_G["ElvDB"]
+	else
+	TukuiDB=_G["TukuiDB"]
+end
+
 local buttonsize
 if TukuiDB.buttonsize and type(TukuiDB.buttonsize)=="number" then
 	buttonsize=TukuiDB.buttonsize
@@ -75,8 +83,9 @@ local function SkinBars(self)
 				if bar.enlarged then frame:SetWidth(TukuiDB.Scale(bar.owner.options.HugeWidth)) else frame:SetWidth(TukuiDB.Scale(bar.owner.options.Width)) end
 				if bar.enlarged then tbar:SetWidth(TukuiDB.Scale(bar.owner.options.HugeWidth)) else tbar:SetWidth(TukuiDB.Scale(bar.owner.options.Width)) end
 
-				frame:SetScale(1)
 				if not frame.styled then
+					frame:SetScale(1)
+					frame.SetScale=TukuiDB.dummy
 					frame:SetHeight(buttonsize/3)
 					TukuiDB.SetTemplate(frame)
 					if ElvUIInstalled then
