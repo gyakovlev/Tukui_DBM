@@ -13,16 +13,17 @@ local croprwicons=true	-- crops blizz shitty borders from icons in RaidWarning m
 local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 ----------------------------------------
 
-local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
-
 -- damn edits compatbility
-local TukuiDB
-if _G["ElvDB"] then
-	TukuiDB=_G["ElvDB"]
+local TukuiDB, TukuiCF
+local E, C, L
+if _G["ElvUI"] then
+	TukuiDB=ElvUI[1]
+	TukuiCF=ElvUI[2]
 	else
 	TukuiDB=_G["TukuiDB"]
+	TukuiCF=_G["TukuiCF"]
 end
-
+local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
 local buttonsize
 if TukuiDB.buttonsize and type(TukuiDB.buttonsize)=="number" then
 	buttonsize=TukuiDB.buttonsize
