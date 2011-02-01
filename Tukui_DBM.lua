@@ -284,21 +284,22 @@ local UploadDBM = function()
 end
 
 local pr = function(msg)
-    print("|cffC495DDDBMskin|r:", tostring(msg))
+    print("|cffC495DDTukui DBM|r:", tostring(msg))
 end
 
 local function rt(i) return function() return i end end
 
 local function healthdemo()
 		DBM.BossHealth:Show("Scary bosses")
-		DBM.BossHealth:AddBoss(rt(25), "Algalon")
-		DBM.BossHealth:AddBoss(rt(50), "Mimiron")
-		DBM.BossHealth:AddBoss(rt(75), "Sindragosa")
+		DBM.BossHealth:AddBoss(rt(25), "Sinestra")
+		DBM.BossHealth:AddBoss(rt(50), "Nefarian")
+		DBM.BossHealth:AddBoss(rt(75), "Gamon")
 		DBM.BossHealth:AddBoss(rt(100), "Hogger")
 end
 
-SLASH_DBMSKIN1 = "/dbmskin"
-SlashCmdList["DBMSKIN"] = function(msg)
+SLASH_TUKUIDBM1 = "/tukuidbm"
+SLASH_TUKUIDBM2 = "/dbmskin" -- backwards compatbility
+SlashCmdList["TUKUIDBM"] = function(msg)
 	if(msg=="apply") then
 		StaticPopup_Show("APPLY_SKIN")        
 	elseif(msg=="test") then
@@ -306,9 +307,9 @@ SlashCmdList["DBMSKIN"] = function(msg)
 	elseif(msg=="bh")then
 		healthdemo()
 	else
-		pr("use |cffFF0000/dbmskin apply|r to apply DBM settings.")
-		pr("use |cffFF0000/dbmskin test|r to launch DBM testmode.")
-		pr("use |cffFF0000/dbmskin bh|r to show test BossHealth frame")
+		pr("use |cffFF0000/tukuidbm apply|r to apply DBM settings.")
+		pr("use |cffFF0000/tukuidbm test|r to launch DBM testmode.")
+		pr("use |cffFF0000/tukuidbm bh|r to show test BossHealth frame.")
 	end
 end
 
