@@ -236,7 +236,7 @@ DBMRangeCheck:HookScript("OnShow",function(self)
 		self:CreateShadow("Default")
 	end
 end)
-if(croprwicons)then
+if (croprwicons) then
 	local replace=string.gsub
 	local old=RaidNotice_AddMessage
 	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
@@ -268,7 +268,7 @@ local UploadDBM = function()
 	DBT_SavedOptions["DBM"].BarYOffset=3
 	DBT_SavedOptions["DBM"].IconLeft=true
 	DBT_SavedOptions["DBM"].ExpandUpwards=true
-	DBT_SavedOptions["DBM"].Texture="Interface\\AddOns\\Tukui\\media\\textures\\normTex"
+	DBT_SavedOptions["DBM"].Texture="Interface\\AddOns\\Tukui\\medias\\textures\\normTex"
 	DBT_SavedOptions["DBM"].IconRight=false
 end
 
