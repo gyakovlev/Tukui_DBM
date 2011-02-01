@@ -14,7 +14,6 @@ local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Work
 ----------------------------------------
 
 local T, C, L = unpack(Tukui)
-local template="Tukui"
 local classcolor = RAID_CLASS_COLORS[T.myclass]
 local buttonsize
 if C.actionbar.buttonsize and type(C.actionbar.buttonsize)=="number" then
@@ -40,7 +39,7 @@ local function SkinBars(self)
 					icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
 					icon1.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
 					if drawshadow then
-						icon1.overlay:CreateShadow(template)
+						icon1.overlay:CreateShadow("Default")
 					end
 				end
 
@@ -48,7 +47,7 @@ local function SkinBars(self)
 					icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
 					icon2.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
 					if drawshadow then
-						icon2.overlay:CreateShadow(template)
+						icon2.overlay:CreateShadow("Default")
 					end
 				end
 
@@ -65,9 +64,9 @@ local function SkinBars(self)
 					frame:SetScale(1)
 					frame.SetScale=T.dummy
 					frame:SetHeight(buttonsize/3)
-					frame:SetTemplate(template)
+					frame:SetTemplate("Default")
 					if drawshadow then
-						frame:CreateShadow(template)
+						frame:CreateShadow("Default")
 					end
 					frame.styled=true
 				end
@@ -186,9 +185,9 @@ local SkinBoss=function()
 
 		if not bar.styled then
 			bar:SetHeight(buttonsize/3)
-			bar:SetTemplate(template)
+			bar:SetTemplate("Default")
 			if drawshadow then
-				bar:CreateShadow(template)
+				bar:CreateShadow("Default")
 			end
 			background:SetNormalTexture(nil)
 			bar.styled=true
@@ -232,9 +231,9 @@ hooksecurefunc(DBM.BossHealth,"UpdateSettings",SkinBoss)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
-	self:SetTemplate(template)
+	self:SetTemplate("Default")
 	if drawshadow then
-		self:CreateShadow(template)
+		self:CreateShadow("Default")
 	end
 end)
 if(croprwicons)then
