@@ -128,7 +128,7 @@ local function SkinBars(self)
 				
 				if not timer.styled then	
 					timer:ClearAllPoints()
-					timer:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", T.Scale(-1), T.Scale(2))
+					timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2)
 					timer:SetFont(C["media"].font, 12, "OUTLINE")
 					timer:SetJustifyH("RIGHT")
 					timer:SetShadowColor(0, 0, 0, 0)
@@ -194,8 +194,6 @@ local SkinBoss=function()
 		end
 
 		if not bar.styled then
-			bar:SetScale(1)
-			bar.SetScale=T.dummy
 			bar:SetHeight(buttonsize/3)
 			bar:SetTemplate(template)
 			if drawshadow then
@@ -216,7 +214,7 @@ local SkinBoss=function()
 
 		if not name.styled then
 			name:ClearAllPoints()
-			name:Point("BOTTOMLEFT", bar, "TOPLEFT", 4, 1)
+			name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4)
 			name:SetFont(C["media"].font, 12, "OUTLINE")
 			name:SetJustifyH("LEFT")
 			name:SetShadowColor(0, 0, 0, 0)
@@ -225,7 +223,7 @@ local SkinBoss=function()
 		
 		if not timer.styled then
 			timer:ClearAllPoints()
-			timer:Point("BOTTOMRIGHT", bar, "TOPRIGHT", -1, 1)
+			timer:Point("BOTTOMRIGHT", bar, "TOPRIGHT", 0, 2)
 			timer:SetFont(C["media"].font, 12, "OUTLINE")
 			timer:SetJustifyH("RIGHT")
 			timer:SetShadowColor(0, 0, 0, 0)
@@ -244,8 +242,8 @@ DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
 	T.SetTemplate(self)
-	if C.actionbar.buttonsize then
-		T.CreateShadow(self)
+	if drawshadow then
+		self:CreateShadow(template)
 	end
 end)
 if(croprwicons)then
@@ -302,7 +300,7 @@ SLASH_TUKUIDBM1 = "/tukuidbm"
 SLASH_TUKUIDBM2 = "/dbmskin" -- backwards compatbility
 SlashCmdList["TUKUIDBM"] = function(msg)
 	if(msg=="apply") then
-		StaticPopup_Show("APPLY_SKIN")        
+		StaticPopup_Show("TUKUIDBM")        
 	elseif(msg=="test") then
 		DBM:DemoMode()
 	elseif(msg=="bh")then
@@ -314,7 +312,7 @@ SlashCmdList["TUKUIDBM"] = function(msg)
 	end
 end
 
-StaticPopupDialogs["APPLY_SKIN"] = {
+StaticPopupDialogs["TUKUIDBM"] = {
 	text = "We need to set some DBM options to apply Tukui DBM skin.\nMost of your settings will remain untouched.",
 	button1 = ACCEPT,
 	button2 = CANCEL,
