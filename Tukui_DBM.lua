@@ -8,28 +8,26 @@ Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
 
 -- little config
 ----------------------------------------
-local forcebosshealthclasscolor=false -- forces BossHealth to be classcolored. not recommended.
-local croprwicons=true	-- crops blizz shitty borders from icons in RaidWarning messages
-local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+local croprwicons=true			-- crops blizz shitty borders from icons in RaidWarning messages
+local drawshadow=false			-- draw Tukui shadows around frames.
+local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 ----------------------------------------
 
 -- damn edits compatbility
-local TukuiDB, TukuiCF
-local E, C, L
-if _G["ElvUI"] then
-	TukuiDB=ElvUI[1]
-	TukuiCF=ElvUI[2]
-	else
-	TukuiDB=_G["TukuiDB"]
-	TukuiCF=_G["TukuiCF"]
+local UI, template
+if ElvUI then 
+	UI=ElvUI 
+else
+	UI=Tukui 
 end
-local classcolor = RAID_CLASS_COLORS[TukuiDB.myclass]
+-- temp
+template="Tukui"
+--
+local T, C, L = unpack(UI)
+local classcolor = RAID_CLASS_COLORS[T.myclass]
 local buttonsize
-if TukuiDB.buttonsize and type(TukuiDB.buttonsize)=="number" then
-	buttonsize=TukuiDB.buttonsize
-elseif
-	TukuiCF.actionbar.buttonsize and type(TukuiCF.actionbar.buttonsize)=="number" then -- Eclipse edit
-	buttonsize=TukuiCF.actionbar.buttonsize
+if C.actionbar.buttonsize and type(C.actionbar.buttonsize)=="number" then
+	buttonsize=C.actionbar.buttonsize
 else
 	buttonsize=30	-- just to be safe
 end
@@ -47,31 +45,19 @@ local function SkinBars(self)
 				local name = _G[frame:GetName().."BarName"]
 				local timer = _G[frame:GetName().."BarTimer"]
 
-				if (icon1.overlay) then
-					icon1.overlay = _G[icon1.overlay:GetName()]
-				else
+				if not (icon1.overlay) then
 					icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
-					icon1.overlay:SetWidth(buttonsize)
-					icon1.overlay:SetHeight(buttonsize)
-					icon1.overlay:SetFrameStrata("BACKGROUND")
-					icon1.overlay:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, TukuiDB.Scale(-2))
-					TukuiDB.SetTemplate(icon1.overlay)
-					if ElvUIInstalled then
-						TukuiDB.CreateShadow(icon1.overlay)
+					icon1.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
+					if drawshadow then
+						icon1.overlay:CreateShadow(template)
 					end
 				end
 
-				if (icon2.overlay) then
-					icon2.overlay = _G[icon2.overlay:GetName()]
-				else
+				if not (icon2.overlay) then
 					icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
-					icon2.overlay:SetWidth(buttonsize)
-					icon2.overlay:SetHeight(buttonsize)
-					icon2.overlay:SetFrameStrata("BACKGROUND")
-					icon2.overlay:SetPoint("BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, TukuiDB.Scale(-2))
-					TukuiDB.SetTemplate(icon2.overlay)
-					if ElvUIInstalled then
-						TukuiDB.CreateShadow(icon2.overlay)
+					icon2.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
+					if drawshadow then
+						icon2.overlay:CreateShadow(template)
 					end
 				end
 
@@ -81,16 +67,16 @@ local function SkinBars(self)
 					tbar:SetStatusBarColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
 				end
 				
-				if bar.enlarged then frame:SetWidth(TukuiDB.Scale(bar.owner.options.HugeWidth)) else frame:SetWidth(TukuiDB.Scale(bar.owner.options.Width)) end
-				if bar.enlarged then tbar:SetWidth(TukuiDB.Scale(bar.owner.options.HugeWidth)) else tbar:SetWidth(TukuiDB.Scale(bar.owner.options.Width)) end
+				if bar.enlarged then frame:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else frame:SetWidth(T.Scale(bar.owner.options.Width)) end
+				if bar.enlarged then tbar:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else tbar:SetWidth(T.Scale(bar.owner.options.Width)) end
 
 				if not frame.styled then
 					frame:SetScale(1)
-					frame.SetScale=TukuiDB.dummy
+					frame.SetScale=T.dummy
 					frame:SetHeight(buttonsize/3)
-					TukuiDB.SetTemplate(frame)
-					if ElvUIInstalled then
-						TukuiDB.CreateShadow(frame)
+					frame:SetTemplate(template)
+					if drawshadow then
+						frame:CreateShadow(template)
 					end
 					frame.styled=true
 				end
@@ -104,49 +90,49 @@ local function SkinBars(self)
 				if not icon1.styled then
 					icon1:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 					icon1:ClearAllPoints()
-					icon1:SetPoint("TOPLEFT", icon1.overlay, TukuiDB.Scale(2), TukuiDB.Scale(-2))
-					icon1:SetPoint("BOTTOMRIGHT", icon1.overlay, TukuiDB.Scale(-2), TukuiDB.Scale(2))
+					icon1:Point("TOPLEFT", icon1.overlay, 2, -2)
+					icon1:Point("BOTTOMRIGHT", icon1.overlay, -2, 2)
 					icon1.styled=true
 				end
 				
 				if not icon2.styled then
 					icon2:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 					icon2:ClearAllPoints()
-					icon2:SetPoint("TOPLEFT", icon2.overlay, TukuiDB.Scale(2), TukuiDB.Scale(-2))
-					icon2:SetPoint("BOTTOMRIGHT", icon2.overlay, TukuiDB.Scale(-2), TukuiDB.Scale(2))
+					icon2:Point("TOPLEFT", icon2.overlay, 2, -2)
+					icon2:Point("BOTTOMRIGHT", icon2.overlay, -2, 2)
 					icon2.styled=true
 				end
 
 				if not texture.styled then
-					texture:SetTexture(TukuiCF["media"].normTex)
+					texture:SetTexture(C["media"].normTex)
 					texture.styled=true
 				end
 
 				if not tbar.styled then
-					tbar:SetPoint("TOPLEFT", frame, "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
-					tbar:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
+					tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
+					tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
 					tbar.styled=true
 				end
 
 				if not name.styled then
 					name:ClearAllPoints()
-					name:SetPoint("BOTTOMLEFT", frame, "TOPLEFT", 0, TukuiDB.Scale(4))
+					name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4)
 					name:SetWidth(165)
 					name:SetHeight(8)
-					name:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
+					name:SetFont(C["media"].font, 12, "OUTLINE")
 					name:SetJustifyH("LEFT")
 					name:SetShadowColor(0, 0, 0, 0)
-					name.SetFont = TukuiDB.dummy
+					name.SetFont = T.dummy
 					name.styled=true
 				end
 				
 				if not timer.styled then	
 					timer:ClearAllPoints()
-					timer:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", TukuiDB.Scale(-1), TukuiDB.Scale(2))
-					timer:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
+					timer:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", T.Scale(-1), T.Scale(2))
+					timer:SetFont(C["media"].font, 12, "OUTLINE")
 					timer:SetJustifyH("RIGHT")
 					timer:SetShadowColor(0, 0, 0, 0)
-					timer.SetFont = TukuiDB.dummy
+					timer.SetFont = T.dummy
 					timer.styled=true
 				end
 
@@ -170,7 +156,7 @@ local SkinBossTitle=function()
 	if not anchor.styled then
 		local header={anchor:GetRegions()}
 			if header[1]:IsObjectType("FontString") then
-				header[1]:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
+				header[1]:SetFont(C["media"].font, 12, "OUTLINE")
 				header[1]:SetTextColor(1,1,1,1)
 				anchor.styled=true	
 			end
@@ -193,25 +179,26 @@ local SkinBoss=function()
 			local	_, anch, _ ,_, _ = bar:GetPoint()
 			bar:ClearAllPoints()
 			if DBM_SavedOptions.HealthFrameGrowUp then
-				bar:SetPoint("BOTTOM", anch, "TOP" , 0 , TukuiDB.Scale(12))
+				bar:Point("BOTTOM", anch, "TOP" , 0 , 12)
 			else
-				bar:SetPoint("TOP", anch, "BOTTOM" , 0, -buttonsize)
+				bar:Point("TOP", anch, "BOTTOM" , 0, -buttonsize)
 			end
 		else
 			bar:ClearAllPoints()
 			if DBM_SavedOptions.HealthFrameGrowUp then
-				bar:SetPoint("TOPLEFT", prev, "TOPLEFT", 0, buttonsize)
+				bar:Point("TOPLEFT", prev, "TOPLEFT", 0, buttonsize)
 			else
-				bar:SetPoint("TOPLEFT", prev, "TOPLEFT", 0, -buttonsize)
+				bar:Point("TOPLEFT", prev, "TOPLEFT", 0, -buttonsize)
 			end
 		end
 
 		if not bar.styled then
 			bar:SetScale(1)
+			bar.SetScale=T.dummy
 			bar:SetHeight(buttonsize/3)
-			TukuiDB.SetTemplate(bar)
-			if ElvUIInstalled then
-				TukuiDB.CreateShadow(bar)
+			bar:SetTemplate(template)
+			if drawshadow then
+				bar:CreateShadow(template)
 			end
 			background:SetNormalTexture(nil)
 			bar.styled=true
@@ -219,28 +206,17 @@ local SkinBoss=function()
 		end	
 		
 		if not progress.styled then
-			progress:SetStatusBarTexture(TukuiCF["media"].normTex)
-			if(forcebosshealthclasscolor)then
-				local tslu=0
-				progress:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
-				progress:HookScript("OnUpdate",function(self,elapsed)
-					tslu=tslu+elapsed
-					if tslu>0.025 then
-						self:SetStatusBarColor(classcolor.r,classcolor.g,classcolor.b,1)
-						tslu=0
-					end
-				end)
-			end
+			progress:SetStatusBarTexture(C["media"].normTex)
 			progress.styled=true
 		end				
 		progress:ClearAllPoints()
-		progress:SetPoint("TOPLEFT", bar, "TOPLEFT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
-		progress:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
+		progress:Point("TOPLEFT", bar, "TOPLEFT", 2, -2)
+		progress:Point("BOTTOMRIGHT", bar, "BOTTOMRIGHT", -2, 2)
 
 		if not name.styled then
 			name:ClearAllPoints()
-			name:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", TukuiDB.Scale(4), TukuiDB.Scale(1))
-			name:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
+			name:Point("BOTTOMLEFT", bar, "TOPLEFT", 4, 1)
+			name:SetFont(C["media"].font, 12, "OUTLINE")
 			name:SetJustifyH("LEFT")
 			name:SetShadowColor(0, 0, 0, 0)
 			name.styled=true
@@ -248,8 +224,8 @@ local SkinBoss=function()
 		
 		if not timer.styled then
 			timer:ClearAllPoints()
-			timer:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", TukuiDB.Scale(-1), TukuiDB.Scale(1))
-			timer:SetFont(TukuiCF["media"].font, 12, "OUTLINE")
+			timer:Point("BOTTOMRIGHT", bar, "TOPRIGHT", -1, 1)
+			timer:SetFont(C["media"].font, 12, "OUTLINE")
 			timer:SetJustifyH("RIGHT")
 			timer:SetShadowColor(0, 0, 0, 0)
 			timer.styled=true
@@ -265,9 +241,9 @@ hooksecurefunc(DBM.BossHealth,"AddBoss",SkinBoss)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
-	TukuiDB.SetTemplate(self)
-	if ElvUIInstalled then
-		TukuiDB.CreateShadow(self)
+	T.SetTemplate(self)
+	if C.actionbar.buttonsize then
+		T.CreateShadow(self)
 	end
 end)
 if(croprwicons)then

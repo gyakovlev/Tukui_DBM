@@ -1,5 +1,5 @@
 ## Interface: 40000
-## Title: |cffC495DDTukui|r |cffffd200DBM|r Skin
+## Title: |cffC495DDTukui DBM|r
 ## Notes: Tukui DBM Skin
 ## Author: Affli @ Howling Fjord (RU)
 ## Version 3.2
