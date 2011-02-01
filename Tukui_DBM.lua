@@ -15,14 +15,16 @@ local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Work
 
 -- damn edits compatbility
 local UI, template
+
 if ElvUI then 
-	UI=ElvUI 
+	UI=ElvUI
+	template="ElvUI"
 else
-	UI=Tukui 
+	-- all other edits.
+	UI=Tukui
+	template="Tukui"
 end
--- temp
-template="Tukui"
---
+
 local T, C, L = unpack(UI)
 local classcolor = RAID_CLASS_COLORS[T.myclass]
 local buttonsize
@@ -241,7 +243,7 @@ hooksecurefunc(DBM.BossHealth,"UpdateSettings",SkinBoss)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
-	T.SetTemplate(self)
+	self:SetTemplate(template)
 	if drawshadow then
 		self:CreateShadow(template)
 	end
@@ -297,7 +299,7 @@ local function healthdemo()
 end
 
 SLASH_TUKUIDBM1 = "/tukuidbm"
-SLASH_TUKUIDBM2 = "/dbmskin" -- backwards compatbility
+SLASH_TUKUIDBM2 = "/dbmskin" -- backwards compatbility, to be removed in the future.
 SlashCmdList["TUKUIDBM"] = function(msg)
 	if(msg=="apply") then
 		StaticPopup_Show("TUKUIDBM")        
