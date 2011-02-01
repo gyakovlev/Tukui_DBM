@@ -13,19 +13,8 @@ local drawshadow=false			-- draw Tukui shadows around frames.
 local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 ----------------------------------------
 
--- damn edits compatbility
-local UI, template
-
-if ElvUI then 
-	UI=ElvUI
-	template="ElvUI"
-else
-	-- all other edits.
-	UI=Tukui
-	template="Tukui"
-end
-
-local T, C, L = unpack(UI)
+local T, C, L = unpack(Tukui)
+local template="Tukui"
 local classcolor = RAID_CLASS_COLORS[T.myclass]
 local buttonsize
 if C.actionbar.buttonsize and type(C.actionbar.buttonsize)=="number" then
