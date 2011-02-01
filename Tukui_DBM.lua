@@ -158,6 +158,7 @@ local SkinBossTitle=function()
 			if header[1]:IsObjectType("FontString") then
 				header[1]:SetFont(C["media"].font, 12, "OUTLINE")
 				header[1]:SetTextColor(1,1,1,1)
+				header[1]:SetShadowColor(0, 0, 0, 0)
 				anchor.styled=true	
 			end
 		header=nil
