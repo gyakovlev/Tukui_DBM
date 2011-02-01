@@ -238,6 +238,7 @@ end
 hooksecurefunc(DBT,"CreateBar",SkinBars)
 hooksecurefunc(DBM.BossHealth,"Show",SkinBossTitle)
 hooksecurefunc(DBM.BossHealth,"AddBoss",SkinBoss)
+hooksecurefunc(DBM.BossHealth,"UpdateSettings",SkinBoss)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
