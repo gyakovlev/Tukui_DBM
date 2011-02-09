@@ -13,6 +13,8 @@ local drawshadow=false			-- draw Tukui shadows around frames.
 local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 ----------------------------------------
 
+
+-- Damn edits compatbility
 local UI
 if ElvUI then UI=ElvUI else UI=Tukui end
 local T, C, L = unpack(UI)
