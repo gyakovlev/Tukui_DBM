@@ -4,6 +4,7 @@
 ## Author: Affli @ Howling Fjord (RU)
 ## Version 3.3
 ## X-Website: http://github.com/Affli/Tukui_DBM
-## RequiredDeps: DBM-Core, Tukui
+## RequiredDeps: DBM-Core
+## OptionalDeps: Tukui, ElvUI
 
 Tukui_DBM.lua

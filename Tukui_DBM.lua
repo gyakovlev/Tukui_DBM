@@ -13,7 +13,9 @@ local drawshadow=false			-- draw Tukui shadows around frames.
 local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 ----------------------------------------
 
-local T, C, L = unpack(Tukui)
+local UI
+if ElvUI then UI=ElvUI else UI=Tukui end
+local T, C, L = unpack(UI)
 local classcolor = RAID_CLASS_COLORS[T.myclass]
 local buttonsize
 if C.actionbar.buttonsize and type(C.actionbar.buttonsize)=="number" then
@@ -268,7 +270,7 @@ local UploadDBM = function()
 	DBT_SavedOptions["DBM"].BarYOffset=3
 	DBT_SavedOptions["DBM"].IconLeft=true
 	DBT_SavedOptions["DBM"].ExpandUpwards=true
-	DBT_SavedOptions["DBM"].Texture="Interface\\AddOns\\Tukui\\medias\\textures\\normTex"
+	DBT_SavedOptions["DBM"].Texture=C["media"].normTex
 	DBT_SavedOptions["DBM"].IconRight=false
 end
 
