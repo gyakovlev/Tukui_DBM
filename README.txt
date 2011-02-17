@@ -30,7 +30,8 @@ This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
 		Q) I want this skin, but i do not use Tukui
 			A) Try DBM_Styler (https://github.com/Affli/DBM_Styler), it's unsupported and early alpha.
 		Q) Can i include this addon into my Tukui-edit?
-			A) Sure. You can include like any addon, or even embed it into your edit, but there is one limitation. The following comment section should never be deleted from Tukui_DBM.lua
+			A) Sure. You can include like any addon, or even embed it into your edit, but there is one limitation. 
+			The following comment section should never be deleted from Tukui_DBM.lua
 				--[[
 
 				Tukui_DBM skin by Affli@RU-Howling Fjord
