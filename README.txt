@@ -17,12 +17,11 @@ This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
 		
 		Tiny config can be found at the top of Tukui_DBM.lua file, the lines a pretty well commented and self-descriptive
 		Default config:
-		----------------------------------------
-		local croprwicons=true			-- crops shitty blizz borders from icons in RaidWarning messages
-		local drawshadow=false			-- draw Tukui shadows around frames.
-		local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
-		----------------------------------------
-			
+		--------------------------
+		local croprwicons=true	-- crops shitty blizz borders from icons in RaidWarning messages
+		local drawshadow=false	-- draw Tukui shadows around frames.
+		local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+		--------------------------			
 
 	FAQ:
 		Q) My bars overlap (http://img33.imageshack.us/img33/1364/dbma.jpg), what should i do?
@@ -30,7 +29,8 @@ This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
 		Q) I want this skin, but i do not use Tukui
 			A) Try DBM_Styler (https://github.com/Affli/DBM_Styler), it's unsupported and early alpha.
 		Q) Can i include this addon into my Tukui-edit?
-			A) Sure. You can include like any addon, or even embed it into your edit, but there is one limitation. 
+			A) Sure.
+			You can include like any addon, or even embed it into your edit, but there is one limitation. 
 			The following comment section should never be deleted from Tukui_DBM.lua
 				--[[
 
