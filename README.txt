@@ -4,11 +4,11 @@ This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
 		http://www.tukui.org/v2/forums/topic.php?id=3549
 
 	Usage:
-		Install DBM
-		Install to <WOW>/Interface/AddOns/
-		type /tukuidbm apply
-		reconfigure DBM as you like
-		go kill some bosses
+		*Install DBM
+		*Install Tukui_DBM to <WOW>/Interface/AddOns/
+		*type /tukuidbm apply
+		*reconfigure DBM as you like
+		*go kill some bosses
 	
 	Config & commands:
 		/tukuidbm test - launch DBM demo mode
