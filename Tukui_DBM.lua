@@ -41,7 +41,7 @@ local function SkinBars(self)
 
 				if not (icon1.overlay) then
 					icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
-					icon1.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
+					icon1.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
 					if drawshadow then
 						icon1.overlay:CreateShadow("Default")
 					end
@@ -49,7 +49,7 @@ local function SkinBars(self)
 
 				if not (icon2.overlay) then
 					icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
-					icon2.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
+					icon2.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
 					if drawshadow then
 						icon2.overlay:CreateShadow("Default")
 					end
