@@ -15,12 +15,13 @@ This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
 		/tukuidbm bh - launch BossHealth demo mode
 		/tukuidbm apply - apply skin settings
 		
-		Tiny config can be found at the top of Tukui_DBM.lua file, the lines a pretty well commented and self-descriptive
+		Tiny config can be found at the top of Tukui_DBM.lua file.
+		The lines a pretty well commented and self-descriptive
 		Default config:
 		--------------------------
 		local croprwicons=true	-- crops shitty blizz borders from icons in RaidWarning messages
 		local drawshadow=false	-- draw Tukui shadows around frames.
-		local rwiconsize=18	-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+		local rwiconsize=18	-- RaidWarning icon size. Works only if croprwicons=true
 		--------------------------			
 
 	FAQ:

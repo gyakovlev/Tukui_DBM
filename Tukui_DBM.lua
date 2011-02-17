@@ -10,7 +10,7 @@ Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
 ----------------------------------------
 local croprwicons=true			-- crops shitty blizz borders from icons in RaidWarning messages
 local drawshadow=false			-- draw Tukui shadows around frames.
-local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+local rwiconsize=18			-- RaidWarning icon size. Works only if croprwicons=true
 ----------------------------------------
 
 
