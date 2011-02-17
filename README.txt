@@ -27,6 +27,8 @@ This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
 	FAQ:
 		Q) My bars overlap (http://img33.imageshack.us/img33/1364/dbma.jpg), what should i do?
 			A) Open DBM settings and modify Y-Offset (Bar options and style)
+		Q) Should i run /tukuidbm apply every time the skin updates?
+			A) No. Only on first install.
 		Q) I want this skin, but i do not use Tukui
 			A) Try DBM_Styler (https://github.com/Affli/DBM_Styler), it's unsupported and early alpha.
 		Q) Can i include this addon into my Tukui-edit?
