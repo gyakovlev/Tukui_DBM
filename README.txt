@@ -1,5 +1,5 @@
 This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
-
+Screenshot worth a thousand words: http://img.skitch.com/20101015-qmn9dg3b47s5rtfkgakf7i56eh.jpg
 	Limited Support provided here:
 		http://www.tukui.org/v2/forums/topic.php?id=3549
 
