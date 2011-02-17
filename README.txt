@@ -4,21 +4,37 @@ This addon skins DBM (http://deadlybossmods.com/) Tukui-like.
 		http://www.tukui.org/v2/forums/topic.php?id=3549
 
 	Usage:
-		*Install DBM
-		*Install Tukui_DBM to <WOW>/Interface/AddOns/
-		*type /tukuidbm apply
-		*reconfigure DBM as you like
-		*go kill some bosses
+		* Install DBM
+		* Install Tukui_DBM to <WOWDir>/Interface/AddOns/
+		* type /tukuidbm apply
+		* reconfigure DBM as you like
+		* go kill some bosses
 	
 	Config & commands:
 		/tukuidbm test - launch DBM demo mode
 		/tukuidbm bh - launch BossHealth demo mode
 		/tukuidbm apply - apply skin settings
 		
-		tiny config can be found at the top of Tukui_DBM.lua file, the lines a pretty well commented and self-descriptive
+		Tiny config can be found at the top of Tukui_DBM.lua file, the lines a pretty well commented and self-descriptive
+		Default config:
+		----------------------------------------
+		local croprwicons=true			-- crops shitty blizz borders from icons in RaidWarning messages
+		local drawshadow=false			-- draw Tukui shadows around frames.
+		local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+		----------------------------------------
+			
 
 	FAQ:
 		Q) My bars overlap (http://img33.imageshack.us/img33/1364/dbma.jpg), what should i do?
 			A) Open DBM settings and modify Y-Offset (Bar options and style)
 		Q) I want this skin, but i do not use Tukui
 			A) Try DBM_Styler (https://github.com/Affli/DBM_Styler), it's unsupported and early alpha.
+		Q) Can i include this addon into my Tukui-edit?
+			A) Sure. You can include like any addon, or even embed it into your edit, but there is one limitation. The following comment section should never be deleted from Tukui_DBM.lua
+				--[[
+
+				Tukui_DBM skin by Affli@RU-Howling Fjord
+				All rights reserved.
+				Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
+
+				]]--
