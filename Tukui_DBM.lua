@@ -61,8 +61,8 @@ local function SkinBars(self)
 					tbar:SetStatusBarColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
 				end
 				
-				if bar.enlarged then frame:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else frame:SetWidth(T.Scale(bar.owner.options.Width)) end
-				if bar.enlarged then tbar:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else tbar:SetWidth(T.Scale(bar.owner.options.Width)) end
+				if bar.enlarged then frame:Width(bar.owner.options.HugeWidth) else frame:Width(bar.owner.options.Width) end
+				if bar.enlarged then tbar:Width(bar.owner.options.HugeWidth) else tbar:Width(bar.owner.options.Width) end
 
 				if not frame.styled then
 					frame:SetScale(1)
