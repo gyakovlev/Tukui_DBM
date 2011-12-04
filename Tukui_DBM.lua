@@ -232,14 +232,21 @@ hooksecurefunc(DBT,"CreateBar",SkinBars)
 hooksecurefunc(DBM.BossHealth,"Show",SkinBossTitle)
 hooksecurefunc(DBM.BossHealth,"AddBoss",SkinBoss)
 hooksecurefunc(DBM.BossHealth,"UpdateSettings",SkinBoss)
-DBM.RangeCheck:Show()
-DBM.RangeCheck:Hide()
-DBMRangeCheck:HookScript("OnShow",function(self)
-	self:SetTemplate("Default")
+hooksecurefunc(DBM.RangeCheck, "Show", function()
+	DBMRangeCheck:SetTemplate("Transparent")
+	DBMRangeCheckRadar:SetTemplate("Transparent")
 	if drawshadow then
-		self:CreateShadow("Default")
+		DBMRangeCheck:CreateShadow("Default")
+		DBMRangeCheckRadar:CreateShadow("Default")
 	end
 end)
+hooksecurefunc(DBM.InfoFrame, "Show", function()
+	DBMInfoFrame:SetTemplate("Transparent")
+	if drawshadow then
+		DBMInfoFrame:CreateShadow("Default")
+	end
+end)
+
 if (croprwicons) then
 	local replace=string.gsub
 	local old=RaidNotice_AddMessage
