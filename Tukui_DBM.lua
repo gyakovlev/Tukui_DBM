@@ -11,6 +11,7 @@ Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
 local croprwicons=true			-- crops shitty blizz borders from icons in RaidWarning messages
 local drawshadow=false			-- draw Tukui shadows around frames.
 local rwiconsize=18			-- RaidWarning icon size. Works only if croprwicons=true
+local transparent=false			-- Use transparent template on bars.
 ----------------------------------------
 
 
@@ -41,7 +42,11 @@ local function SkinBars(self)
 
 				if not (icon1.overlay) then
 					icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
-					icon1.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
+					if transparent then
+						icon1.overlay:CreatePanel("Transparent", buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
+					else
+						icon1.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
+					end
 					if drawshadow then
 						icon1.overlay:CreateShadow("Default")
 					end
@@ -49,7 +54,11 @@ local function SkinBars(self)
 
 				if not (icon2.overlay) then
 					icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
-					icon2.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
+					if transparent then
+						icon2.overlay:CreatePanel("Transparent", buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
+					else
+						icon2.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
+					end
 					if drawshadow then
 						icon2.overlay:CreateShadow("Default")
 					end
@@ -68,7 +77,11 @@ local function SkinBars(self)
 					frame:SetScale(1)
 					frame.SetScale=T.dummy
 					frame:SetHeight(buttonsize/3)
-					frame:SetTemplate("Default")
+					if transparent then
+						frame:SetTemplate("Transparent")
+					else
+						frame:SetTemplate("Default")
+					end
 					if drawshadow then
 						frame:CreateShadow("Default")
 					end
@@ -189,7 +202,11 @@ local SkinBoss=function()
 
 		if not bar.styled then
 			bar:SetHeight(buttonsize/3)
-			bar:SetTemplate("Default")
+			if transparent then
+				bar:SetTemplate("Transparent")
+			else
+				bar:SetTemplate("Default")
+			end
 			if drawshadow then
 				bar:CreateShadow("Default")
 			end
@@ -298,7 +315,6 @@ local function healthdemo()
 end
 
 SLASH_TUKUIDBM1 = "/tukuidbm"
-SLASH_TUKUIDBM2 = "/dbmskin" -- backwards compatbility, to be removed in the future.
 SlashCmdList["TUKUIDBM"] = function(msg)
 	if(msg=="apply") then
 		StaticPopup_Show("TUKUIDBM")        
